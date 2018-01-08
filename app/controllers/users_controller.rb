@@ -28,12 +28,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-       redirect_to @user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      redirect_back_or user
       # Handle a successful save.
     else
       render 'new'

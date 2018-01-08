@@ -53,6 +53,14 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+     @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+      # Handle a successful update.
+    else
+      render 'edit'
+    end
     # respond_to do |format|
     #   if @user.update(user_params)
     #     format.html { redirect_to @user, notice: 'User was successfully updated.' }

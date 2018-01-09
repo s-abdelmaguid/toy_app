@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+  get 'password_resets/edit'
   get 'session/new'
   resources :microposts
   resources :users
@@ -13,4 +15,5 @@ Rails.application.routes.draw do
   post   '/login',   to: 'session#create'
   delete '/logout',  to: 'session#destroy'
   resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
 end

@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   get 'password_resets/edit'
   get 'session/new'
   resources :microposts
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
   get  '/help',    to: 'static_pages#help'
